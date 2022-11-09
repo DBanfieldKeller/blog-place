@@ -5,7 +5,14 @@ const { Post, Comment } = require('../../models');
 // get all posts
 
 router.get('/', async (req, res) => {
-  const postData = await Post.findAll().catch((err) => {
+  const postData = await Post.findAll({
+    include: [
+      {
+       all: true,
+       nested: true,
+      }
+    ]
+  }).catch((err) => {
     res.json(err);
   });
   res.json(postData);
