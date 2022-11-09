@@ -1,6 +1,39 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 
+
+// get all posts
+
+router.get('/', async (req, res) => {
+  const postData = await Post.findAll().catch((err) => {
+    res.json(err);
+  });
+  res.json(postData);
+});
+
+// get all posts by current user
+router.get('/user_posts', async (req, res) => {
+  try {
+  const userPosts = await Post.findAll({
+    order: ['id', 'DESC'],
+    where: {
+      user_id: req.session.user_id,
+    },
+    include: [
+      {
+        model: Comment,
+      }
+    ]
+  });
+
+  if (!userPosts) {
+    res.status(404).json({ message: 'You have not made any posts yet' })
+  }
+  res.status(200).json(userPosts);
+} catch (err) {
+  res.status(500).json(err);
+}
+})
 
 // new post
 router.post('/', async (req, res) => {
