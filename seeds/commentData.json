@@ -1,0 +1,22 @@
+[
+{
+    "content" : "cool post!",
+    "user_id" : 2,
+    "post_id" : 1
+},
+{
+    "content" : "poggers!",
+    "user_id" : 3,
+    "post_id" : 2
+},
+{
+    "content" : "cool beans post!",
+    "user_id" : 1,
+    "post_id" : 2
+},
+{
+    "content" : "bad post!",
+    "user_id" : 2,
+    "post_id" : 1
+}
+]
